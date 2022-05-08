@@ -475,10 +475,6 @@ AddEventHandler('resto:cuir', function()
   ClearPedTasksImmediately(PlayerPedId()) -- Function to stop the animation
 end)
 
-function deleteCar( entity )
-    Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( entity ) )
-end
-
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
   PlayerData = xPlayer
@@ -487,6 +483,7 @@ end)
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
   PlayerData.job = job
+  PlayerData.job.grade_name = grade_name
 end)
 
 AddEventHandler('liam_chickfila:hasEnteredMarker', function(zone)
@@ -557,6 +554,7 @@ elseif Config.qtarget == true then
           label = "Cook Fries",
         },
       },
+      job = {"chic"},
       distance = 1.0
   })
 end
@@ -590,6 +588,7 @@ elseif Config.qtarget == true then
           label = "Cook Other Foods",
         },
       },
+      job = {"chic"},
       distance = 1.0
   })
 end
@@ -623,6 +622,7 @@ elseif Config.qtarget == true then
           label = "Boss Menu",
         },
       },
+      job = {"chic"},
       distance = 1.0
   })
 end
@@ -630,25 +630,17 @@ end)
 
 RegisterNetEvent('liam_chickfila:openharvestmenu1')
 AddEventHandler('liam_chickfila:openharvestmenu1', function(job)
-  if PlayerData.job == "chic" then
-    OpenChickCookMenu()
-  else
-    ESX.ShowNotification("You Dont Have Permission To Cook Here")
-  end
+  OpenChickCookMenu()
 end)
 
 RegisterNetEvent('liam_chickfila:openharvestmenu2')
 AddEventHandler('liam_chickfila:openharvestmenu2', function(job)
-  if PlayerData.job == "chic" then
-    OpenChickCookMenu2()
-  else
-    ESX.ShowNotification("You Dont Have Permission To Cook Here")
-  end
+  OpenChickCookMenu2()
 end)
 
 RegisterNetEvent('liam_chickfila:chick_actions_menu')
 AddEventHandler('liam_chickfila:chick_actions_menu', function(job)
-  if Config.EnablePlayerManagement and PlayerData.job == "chic" and PlayerData.job.grade_name == "boss" then
+  if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.grade_name == 'boss' then
     OpenChickActionsMenu()
   else
     ESX.ShowNotification("You Dont Have Permission To Access The Boss Menu")
