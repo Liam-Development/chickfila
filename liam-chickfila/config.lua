@@ -4,6 +4,9 @@ Config.MaxInService               = -1
 Config.EnablePlayerManagement     = true
 Config.Locale = 'en'
 
+Config.bttarget = false
+Config.qtarget = true
+
 -- https://docs.fivem.net/docs/game-references/blips/ for blips
 Config.EnableBlip = true -- Enable Or Disable The Blip
 Config.BlipName = "ChickFilA" -- Name Of The Blip
