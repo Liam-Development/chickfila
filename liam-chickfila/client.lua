@@ -530,6 +530,7 @@ end)
 end
 
 Citizen.CreateThread(function()
+  if Config.bttarget == true then
   exports['bt-target']:AddBoxZone("CookFries", vector3(Config.Zones.CookFries.Pos.x, Config.Zones.CookFries.Pos.y, Config.Zones.CookFries.Pos.z), 2, 2, {
     name="CookFries",
     heading=0,
@@ -544,9 +545,25 @@ Citizen.CreateThread(function()
     job = {"chic"},
     distance = 1.0
   })
+elseif Config.qtarget == true then
+  exports.qtarget:AddBoxZone("CookFries", vector3(Config.Zones.CookFries.Pos.x, Config.Zones.CookFries.Pos.y, Config.Zones.CookFries.Pos.z), 2, 2, {
+    name="CookFries",
+    heading=0,
+    }, {
+      options = {
+        {
+          event = "liam_chickfila:openharvestmenu1",
+          icon = "fas fa-sign-in-alt",
+          label = "Cook Fries",
+        },
+      },
+      distance = 1.0
+  })
+end
 end)
 
 Citizen.CreateThread(function()
+  if Config.bttarget == true then
   exports['bt-target']:AddBoxZone("CookComboOrBurger", vector3(Config.Zones.CookOthers.Pos.x, Config.Zones.CookOthers.Pos.y, Config.Zones.CookOthers.Pos.z), 2, 2, {
     name="CookComboOrBurger",
     heading=0,
@@ -561,9 +578,25 @@ Citizen.CreateThread(function()
     job = {"chic"},
     distance = 1.0
   })
+elseif Config.qtarget == true then
+  exports.qtarget:AddBoxZone("CookComboOrBurger", vector3(Config.Zones.CookOthers.Pos.x, Config.Zones.CookOthers.Pos.y, Config.Zones.CookOthers.Pos.z), 2, 2, {
+    name="CookFries",
+    heading=0,
+    }, {
+      options = {
+        {
+          event = "liam_chickfila:openharvestmenu2",
+          icon = "fas fa-sign-in-alt",
+          label = "Cook Other Foods",
+        },
+      },
+      distance = 1.0
+  })
+end
 end)
 
 Citizen.CreateThread(function()
+  if Config.bttarget == true then
   exports['bt-target']:AddBoxZone("ActionsMenu", vector3(Config.Zones.ChickActions.Pos.x, Config.Zones.ChickActions.Pos.y, Config.Zones.ChickActions.Pos.z), 2, 2, {
     name="ActionsMenu",
     heading=0,
@@ -578,21 +611,44 @@ Citizen.CreateThread(function()
     job = {"chic"},
     distance = 1.0
   })
+elseif Config.qtarget == true then
+  exports.qtarget:AddBoxZone("ActionsMenu", vector3(Config.Zones.ChickActions.Pos.x, Config.Zones.ChickActions.Pos.y, Config.Zones.ChickActions.Pos.z), 2, 2, {
+    name="ActionsMenu",
+    heading=0,
+    }, {
+      options = {
+        {
+          event = "liam_chickfila:chick_actions_menu",
+          icon = "fas fa-sign-in-alt",
+          label = "Boss Menu",
+        },
+      },
+      distance = 1.0
+  })
+end
 end)
 
 RegisterNetEvent('liam_chickfila:openharvestmenu1')
 AddEventHandler('liam_chickfila:openharvestmenu1', function(job)
-  OpenChickCookMenu()
+  if PlayerData.job == "chic" then
+    OpenChickCookMenu()
+  else
+    ESX.ShowNotification("You Dont Have Permission To Cook Here")
+  end
 end)
 
 RegisterNetEvent('liam_chickfila:openharvestmenu2')
 AddEventHandler('liam_chickfila:openharvestmenu2', function(job)
-  OpenChickCookMenu2()
+  if PlayerData.job == "chic" then
+    OpenChickCookMenu2()
+  else
+    ESX.ShowNotification("You Dont Have Permission To Cook Here")
+  end
 end)
 
 RegisterNetEvent('liam_chickfila:chick_actions_menu')
 AddEventHandler('liam_chickfila:chick_actions_menu', function(job)
-  if Config.EnablePlayerManagement and PlayerData.job ~= nil and PlayerData.job.grade_name == 'boss' then
+  if Config.EnablePlayerManagement and PlayerData.job == "chic" and PlayerData.job.grade_name == "boss" then
     OpenChickActionsMenu()
   else
     ESX.ShowNotification("You Dont Have Permission To Access The Boss Menu")
