@@ -11,7 +11,7 @@ end
 local function Harvest(source, zone)
     local xPlayer = ESX.GetPlayerFromId(source)
     
-            TriggerClientEvent('resto:cuir' , source)
+            TriggerClientEvent('liam_chickfila:animation' , source)
             Citizen.Wait(Config.CookingTime)
             xPlayer.addInventoryItem("chicfries", Config.FriesAmount)
   end
@@ -22,7 +22,7 @@ AddEventHandler('liam_chickfila:startHarvest', function()
   local xPlayer = ESX.GetPlayerFromId(source)
     
     PlayersHarvesting[_source]=true
-    TriggerClientEvent('resto:cuir' , source)
+    TriggerClientEvent('liam_chickfila:animation' , source)
     Harvest(_source,zone)
 end)
 
@@ -31,7 +31,7 @@ end)
 local function Harvest2(source, zone)
     local xPlayer = ESX.GetPlayerFromId(source)
     
-            TriggerClientEvent('resto:cuir' , source)
+            TriggerClientEvent('liam_chickfila:animation' , source)
             Citizen.Wait(Config.CookingTime)
             xPlayer.addInventoryItem('chicnuggets', Config.NuggetsAmount)
   end
@@ -42,13 +42,13 @@ AddEventHandler('liam_chickfila:startHarvest2', function()
   local xPlayer = ESX.GetPlayerFromId(source)
     
     PlayersHarvesting[_source]=true
-    TriggerClientEvent('resto:cuir' , source)
+    TriggerClientEvent('liam_chickfila:animation' , source)
     Harvest2(_source,zone)
 end)
 
 local function Harvest3(source, zone)
     local xPlayer = ESX.GetPlayerFromId(source)
-    TriggerClientEvent('resto:cuir' , source)
+    TriggerClientEvent('liam_chickfila:animation' , source)
     Citizen.Wait(Config.CookingTime)
     xPlayer.addInventoryItem('chiccombo', Config.ComboMealAmount)
 end
@@ -59,7 +59,7 @@ AddEventHandler('liam_chickfila:startHarvest3', function()
   local xPlayer = ESX.GetPlayerFromId(source)
     
     PlayersHarvesting[_source]=true
-    TriggerClientEvent('resto:cuir' , source)
+    TriggerClientEvent('liam_chickfila:animation' , source)
     Harvest2(_source,zone)
 end)
 
